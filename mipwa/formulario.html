@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" class="light dark">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario - PWA con MD</title>
+    <script src="js/registraServiceWorker.js"></script>
+    <meta name="viewport" content="width=device-width">
+    <meta name="theme-color" content="#fffbfe">
+    <link rel="icon" sizes="32x32" href="favicon.ico">
+    <link rel="manifest" href="site.webmanifest">
+    <script src="ungap/custom-elements.js"></script>
+    <script type="module" src="js/configura.js"></script>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/transicion_completa.css">
+</head>
+
+<body>
+  <form id="form" novalidate onsubmit="procesa(event)">
+    <md-top-app-bar>
+      <h1 slot="headline">Formulario</h1>
+      <button is="md-menu-button" slot="navigation"></button>
+    </md-top-app-bar>
+
+    <main style="padding:16px;">
+      <p>
+        <label for="selectInt">Integrante *</label><br>
+        <md-select id="selectInt" required style="width:100%;">
+          <md-option value="">Selecciona integrante</md-option>
+          <md-option value="angel">Angel</md-option>
+          <md-option value="missa">Missa</md-option>
+          <md-option value="esther">Esther</md-option>
+          <md-option value="jessica">Jessica</md-option>
+          <md-option value="antonio">Antonio</md-option>
+          <md-option value="marco">Marco</md-option>
+        </md-select>
+        <small id="supportingInt">Obligatorio</small>
+      </p>
+
+      <p>
+        <md-filled-button type="submit" style="width: 100%;">Recomendar</md-filled-button>
+      </p>
+    </main>
+  </form>
+
+  <script type="module">
+    function procesa(evt) {
+      evt.preventDefault();
+      const selectInt = document.getElementById("selectInt");
+      if (selectInt.value === "") {
+        alert("Selecciona un integrante");
+        return;
+      }
+
+      const integrante = selectInt.value;
+      const resultado = recomienda(integrante);
+      alert(resultado);
+    }
+
+    /** @param {string} integrante */
+    function recomienda(integrante) {
+      if (integrante === "angel") {
+        return "El dinero no da la felicidad… pero cómo entretiene.";
+      } else if (integrante === "missa") {
+        return "Mi novia me dijo “ponte cómodo”, así que me fui a mi casa.";
+      } else if (integrante === "esther") {
+        return "El café me cae mal… porque siempre me deja despierto.";
+      } else if (integrante === "jessica") {
+        return "Mi memoria es tan buena… que olvido las cosas dos veces.";
+      } else if (integrante === "antonio") {
+        return "Siempre duermo como un bebé… lloro toda la noche.";
+      } else if (integrante === "marco") {
+        return "El tamaño no importa… hasta que no entra en el cajón.";
+      }
+    }
+  </script>
+</body>
+
+</html>
